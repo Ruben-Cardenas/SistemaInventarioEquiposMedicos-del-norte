@@ -190,9 +190,77 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 }
 @media(max-width:520px){.pasos{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== Mejora visual ===== */
+body{background:#f4f7f5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{letter-spacing:-.01em}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--verde),#f2b63c);z-index:60}
+header{transition:box-shadow .3s}
+header.scrolled{box-shadow:0 8px 24px -16px rgba(15,47,44,.5)}
+nav a.act:not(.btn){color:var(--tinta);font-weight:600;box-shadow:0 2px 0 var(--verde)}
+.btn{box-shadow:0 6px 16px -8px rgba(11,122,107,.8);transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 22px -10px rgba(11,122,107,.8)}
+.btn.sec{box-shadow:none}
+.eyebrow{display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);margin-bottom:12px;padding-left:34px;position:relative}
+.eyebrow::before{content:"";position:absolute;left:0;top:50%;width:24px;height:2px;background:var(--verde)}
+.eyebrow.pill{background:var(--menta);padding:6px 14px;border-radius:30px;margin-bottom:20px}
+.eyebrow.pill::before{display:none}
+.contacto .eyebrow{color:#f2b63c}.contacto .eyebrow::before{background:#f2b63c}
+.titulo{max-width:22ch}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:radial-gradient(620px 320px at 88% 8%,rgba(11,122,107,.18),transparent 70%),radial-gradient(520px 320px at 0% 95%,rgba(242,182,60,.16),transparent 70%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--linea) 1px,transparent 1px),linear-gradient(90deg,var(--linea) 1px,transparent 1px);background-size:44px 44px;opacity:.4;-webkit-mask-image:linear-gradient(#000,transparent 85%);mask-image:linear-gradient(#000,transparent 85%)}
+.hero>.wrap{position:relative}
+.hero h1 em{font-style:italic;color:var(--verde);background:linear-gradient(transparent 64%,#f6d98e 64%);padding:0 4px}
+.panel{box-shadow:0 0 0 6px rgba(11,122,107,.08),0 30px 60px -28px rgba(15,47,44,.6)}
+.tabla tbody tr{transition:background .15s}
+.tabla tbody tr:hover{background:#f1f8f5}
+.confianza span{background:var(--blanco);border:1px solid var(--linea);padding:4px 12px;border-radius:30px}
+
+/* Cinta */
+.ticker{background:var(--tinta);color:#cfe5df;overflow:hidden;white-space:nowrap;padding:15px 0;font-size:15px;letter-spacing:.04em}
+.ticker-in{display:inline-flex;animation:mq 32s linear infinite}
+.ticker span{padding-right:38px}
+.ticker span::after{content:"✚";color:#f2b63c;margin-left:38px;font-size:12px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* Tarjetas y bloques */
+.caja,.plan,.testi figure,.pasos li,details{transition:transform .25s,box-shadow .25s,border-color .25s}
+.caja{box-shadow:0 12px 30px -24px rgba(15,47,44,.5)}
+.pasos li{background:linear-gradient(180deg,#fff,#f8fbf9)}
+.pasos li::before{box-shadow:0 0 0 6px var(--menta)}
+.rol{background:var(--blanco);border:1px solid var(--linea);border-top-width:4px;border-radius:14px;padding:26px}
+.rol::before{content:"🧑‍💼";display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:var(--menta);font-size:22px;margin-bottom:14px}
+.rol:nth-child(2)::before{content:"🏥";background:var(--ambar-bg)}
+.rol:nth-child(3)::before{content:"📦";background:#dfe9e6}
+.func-lista button{border-left:4px solid transparent;transition:background .2s,transform .2s}
+.func-lista button[aria-selected="true"]{border-left-color:var(--verde);transform:translateX(6px)}
+.func-detalle{background:linear-gradient(150deg,var(--tinta),#12514a);box-shadow:0 30px 50px -30px rgba(15,47,44,.8)}
+.func-detalle li::marker{color:#f2b63c}
+.plan.top{background:linear-gradient(180deg,#f2fbf8,#fff 40%)}
+.plan .precio{margin:4px 0 2px}
+details[open]{border-color:var(--verde);box-shadow:0 10px 24px -20px rgba(11,122,107,.8)}
+.oferta{position:relative;overflow:hidden}
+.oferta::after{content:"%";position:absolute;right:-10px;bottom:-60px;font-family:var(--serif);font-size:240px;color:rgba(255,255,255,.05);line-height:1;pointer-events:none}
+.cta-final{background:radial-gradient(500px 240px at 15% 0%,rgba(255,255,255,.16),transparent 70%),linear-gradient(120deg,#0b7a6b,#0f5f58)}
+.contacto{background:radial-gradient(520px 320px at 100% 0%,rgba(11,122,107,.45),transparent 70%),var(--tinta)}
+input:focus,select:focus,textarea:focus{outline:3px solid #f2b63c;border-color:#f2b63c}
+
+/* Animación de entrada */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.js .rv.in{opacity:1;transform:none}
+.js .caja.rv.in:hover,.js .plan.rv.in:hover,.js .testi figure.rv.in:hover,.js .pasos li.rv.in:hover{transform:translateY(-5px);box-shadow:0 22px 40px -26px rgba(15,47,44,.6)}
+
+/* Subir */
+#up{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;border:0;background:var(--tinta);color:#fff;font-size:20px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .2s;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);z-index:40}
+#up.ver{opacity:1;pointer-events:auto}
+#up:hover{transform:translateY(-3px)}
+@media(prefers-reduced-motion:reduce){.ticker-in{animation:none}.js .rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div id="prog"></div>
 <div class="promo-bar" id="promoBar"><b>Oferta de lanzamiento:</b> 20 % de descuento en tus primeros 3 meses con el código <b>LANZA20</b> <a href="#planes">Ver planes</a><button type="button" id="promoCerrar" aria-label="Cerrar aviso">×</button></div>
 <header>
   <div class="wrap nav">
@@ -215,7 +283,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <section class="hero" id="inicio">
   <div class="wrap hero-grid">
     <div>
-      <h1>Sabe qué tienes en cada sucursal antes de que se acabe.</h1>
+      <span class="eyebrow pill">Inventario para equipo médico</span>
+      <h1>Sabe qué tienes en <em>cada sucursal</em> antes de que se acabe.</h1>
       <p class="lead">MedInventory concentra las existencias de tu matriz y tus sucursales, avisa cuando un producto está por agotarse y registra cada traspaso de equipo médico.</p>
       <div class="acciones">
         <a class="btn" href="#contacto">Solicitar demo</a>
@@ -243,8 +312,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </div>
 </section>
 
+<div class="ticker" aria-label="Características principales"><div class="ticker-in"><span>Existencias en tiempo real</span><span>Traspasos entre sucursales</span><span>Alertas de stock bajo</span><span>Historial de movimientos</span><span>Roles y permisos</span><span>Reportes claros</span><span aria-hidden="true"></span><span>Existencias en tiempo real</span><span>Traspasos entre sucursales</span><span>Alertas de stock bajo</span><span>Historial de movimientos</span><span>Roles y permisos</span><span>Reportes claros</span><span aria-hidden="true"></span></div></div>
+
 <section>
   <div class="wrap">
+    <span class="eyebrow">El problema</span>
     <h2 class="titulo">De las hojas sueltas a un solo registro</h2>
     <p class="sub">Cuando el inventario vive en libretas y hojas de cálculo distintas, nadie sabe con certeza qué hay en cada lugar.</p>
     <div class="antes-despues">
@@ -272,6 +344,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <section class="fondo-b" id="funciones">
   <div class="wrap">
+    <span class="eyebrow">Funciones</span>
     <h2 class="titulo">Lo que puedes hacer con el sistema</h2>
     <p class="sub">Elige una función para ver en qué te ayuda.</p>
     <div class="func">
@@ -288,6 +361,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <section id="proceso">
   <div class="wrap">
+    <span class="eyebrow">Proceso</span>
     <h2 class="titulo">Cómo se mueve un producto</h2>
     <p class="sub">El recorrido de una solicitud de reabastecimiento, de principio a fin.</p>
     <ol class="pasos">
@@ -301,6 +375,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <section class="fondo-b">
   <div class="wrap">
+    <span class="eyebrow">Roles</span>
     <h2 class="titulo">Cada persona ve lo que necesita</h2>
     <p class="sub">Los permisos separan quién consulta, quién solicita y quién autoriza.</p>
     <div class="roles">
@@ -313,6 +388,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <section id="planes">
   <div class="wrap">
+    <span class="eyebrow">Planes</span>
     <h2 class="titulo">Un plan para cada etapa de tu negocio</h2>
     <p class="sub">Empieza con una sucursal y crece cuando lo necesites. Sin contratos forzosos.</p>
     <div class="toggle" role="group" aria-label="Periodo de facturación">
@@ -359,6 +435,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <section class="fondo-b">
   <div class="wrap">
+    <span class="eyebrow">Opiniones</span>
     <h2 class="titulo">Lo que dirían quienes lo usan</h2>
     <p class="sub">Testimonios de ejemplo, escritos para ilustrar el diseño de la página.</p>
     <div class="testi">
@@ -371,6 +448,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 <section id="faq">
   <div class="wrap" style="max-width:780px">
+    <span class="eyebrow">Dudas</span>
     <h2 class="titulo">Preguntas frecuentes</h2>
     <p class="sub">Lo que suelen preguntar antes de empezar.</p>
     <details><summary>¿Cuántas sucursales puedo manejar?</summary><p>El proyecto está pensado para una matriz y varias sucursales, y puede ampliarse agregando nuevas ubicaciones.</p></details>
@@ -391,7 +469,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <section class="contacto" id="contacto">
   <div class="wrap c-grid">
     <div>
-      <h2 class="titulo">Solicita una demostración</h2>
+      <span class="eyebrow">Contacto</span>
+    <h2 class="titulo">Solicita una demostración</h2>
       <p class="sub">Cuéntanos cómo manejas hoy tu inventario y te mostramos cómo quedaría en MedInventory.</p>
       <div class="datos">
         <p><strong>Correo:</strong> contacto@medinventory.com</p>
@@ -416,6 +495,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 <footer>
   <div class="wrap"><span>© 2026 MedInventory · Sistema de Inventario de Equipos Médicos</span><span>Proyecto académico de desarrollo de software</span></div>
 </footer>
+<button type="button" id="up" aria-label="Volver arriba">↑</button>
 
 <script>
 /* ---- Inventario de demostración ---- */
@@ -537,6 +617,30 @@ document.getElementById("form").addEventListener("submit",e=>{
   document.getElementById("ok").innerHTML=`<p class="exito">Solicitud enviada. Gracias, ${n.value.trim().split(" ")[0]}; te contactaremos pronto.</p>`;
   e.target.reset();
 });
+
+/* ---- Efectos visuales ---- */
+document.documentElement.classList.add("js");
+const rv=document.querySelectorAll(".titulo,.sub,.caja,.pasos li,.rol,.plan,.testi figure,details,.oferta,.func,.cta-final .wrap");
+rv.forEach(e=>{e.classList.add("rv");e.style.transitionDelay=Math.min([...e.parentElement.children].indexOf(e),5)*90+"ms"});
+if("IntersectionObserver" in window){
+  const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.12});
+  rv.forEach(e=>io.observe(e));
+}else rv.forEach(e=>e.classList.add("in"));
+
+const hd=document.querySelector("header"),prog=document.getElementById("prog"),up=document.getElementById("up");
+addEventListener("scroll",()=>{
+  const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(h>0?y/h*100:0)+"%";
+  hd.classList.toggle("scrolled",y>10);
+  up.classList.toggle("ver",y>700);
+},{passive:true});
+up.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+
+const enl=[...document.querySelectorAll("#menu a[href^='#']:not(.btn)")];
+if("IntersectionObserver" in window){
+  const so=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)enl.forEach(a=>a.classList.toggle("act",a.getAttribute("href")==="#"+x.target.id))}),{rootMargin:"-45% 0px -50% 0px"});
+  enl.forEach(a=>{const t=document.querySelector(a.getAttribute("href"));if(t)so.observe(t)});
+}
 </script>
 </body>
 </html>
