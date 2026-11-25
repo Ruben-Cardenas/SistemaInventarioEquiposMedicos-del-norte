@@ -1,173 +1,401 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MedInventory: sistema para administrar productos médicos y controlar existencias entre matriz y sucursales.">
-    <title>MedInventory | Inventario Médico</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f8fa;
-            color: #263746;
-            line-height: 1.6;
-        }
-        header {
-            background: #125c68;
-            color: white;
-            padding: 22px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        header h1 { font-size: 23px; }
-        nav { display: flex; flex-wrap: wrap; gap: 18px; }
-        nav a { color: white; text-decoration: none; }
-        nav a:hover { text-decoration: underline; }
-        .hero {
-            background: linear-gradient(120deg, #125c68, #238c91);
-            color: white;
-            padding: 85px 10%;
-            text-align: center;
-        }
-        .hero h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 20px; }
-        .hero p { max-width: 700px; margin: auto; font-size: 18px; }
-        .boton {
-            display: inline-block;
-            margin-top: 28px;
-            background: white;
-            color: #125c68;
-            padding: 13px 28px;
-            border-radius: 7px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .boton:hover { background: #e5f2f2; }
-        section { padding: 65px 9%; }
-        .titulo {
-            text-align: center;
-            color: #125c68;
-            font-size: 29px;
-            margin-bottom: 20px;
-        }
-        .descripcion { max-width: 800px; margin: auto; text-align: center; }
-        .tarjetas {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
-            margin-top: 35px;
-        }
-        .tarjeta {
-            background: white;
-            padding: 28px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            text-align: center;
-        }
-        .icono { font-size: 38px; margin-bottom: 12px; }
-        .tarjeta h3 { color: #176b78; margin-bottom: 12px; }
-        .banner {
-            background: #e0f0f0;
-            text-align: center;
-            border-radius: 15px;
-            padding: 45px 20px;
-            margin-top: 25px;
-        }
-        .banner h3 { color: #125c68; font-size: 25px; }
-        .banner-iconos { font-size: 48px; margin-top: 15px; }
-        .contacto { background: #eaf1f3; text-align: center; }
-        .contacto p { margin: 8px; }
-        footer {
-            background: #103f49;
-            color: white;
-            text-align: center;
-            padding: 22px;
-        }
-        @media (max-width: 600px) {
-            header { justify-content: center; text-align: center; }
-            .hero { padding: 65px 7%; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MedInventory: controla existencias, traspasos y alertas de stock de tu matriz y sucursales de equipo médico.">
+<title>MedInventory | Inventario para distribuidoras médicas</title>
+<style>
+:root{
+  --tinta:#0f2f2c; --verde:#0b7a6b; --menta:#d9efe8; --papel:#f4f7f5; --blanco:#fff;
+  --ambar:#b87400; --ambar-bg:#fdf0d2; --rojo:#b42318; --rojo-bg:#fde4e1; --ok:#17794a; --ok-bg:#dcf3e5;
+  --linea:#d3ded9; --texto:#2b3f3c; --suave:#5d716d;
+  --serif:Georgia,"Times New Roman",serif; --sans:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--sans);background:var(--papel);color:var(--texto);line-height:1.65}
+h1,h2,h3{font-family:var(--serif);color:var(--tinta);line-height:1.15;font-weight:700}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ambar);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+section{padding:84px 0}
+
+/* Navegación */
+header{position:sticky;top:0;z-index:20;background:rgba(244,247,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--tinta);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo i{width:26px;height:26px;border-radius:7px;background:var(--verde);position:relative;display:inline-block}
+.logo i::before,.logo i::after{content:"";position:absolute;background:#fff;border-radius:2px}
+.logo i::before{left:11px;top:5px;width:4px;height:16px}
+.logo i::after{left:5px;top:11px;width:16px;height:4px}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav a{text-decoration:none;font-size:15px;color:var(--suave)}
+nav a:hover{color:var(--tinta)}
+.btn{display:inline-block;background:var(--verde);color:#fff!important;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:inherit;font-weight:600;transition:background .2s}
+.btn:hover{background:#09655a}
+.btn.sec{background:transparent;color:var(--tinta)!important;border:1.5px solid var(--tinta)}
+.btn.sec:hover{background:var(--menta)}
+.menu-btn{display:none;background:none;border:1.5px solid var(--linea);border-radius:8px;padding:6px 12px;font:inherit;cursor:pointer}
+
+/* Hero */
+.hero{padding:70px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.5px;margin-bottom:20px}
+.hero p.lead{font-size:18px;max-width:46ch;color:var(--suave);margin-bottom:28px}
+.hero .acciones{display:flex;gap:12px;flex-wrap:wrap}
+.confianza{margin-top:30px;font-size:14px;color:var(--suave);display:flex;gap:20px;flex-wrap:wrap}
+.confianza span::before{content:"✓ ";color:var(--ok);font-weight:700}
+
+/* Panel interactivo */
+.panel{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;box-shadow:0 18px 40px -22px rgba(15,47,44,.45);overflow:hidden}
+.panel-top{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--tinta);color:#fff;font-size:14px}
+.panel-top b{font-weight:600}
+.panel-top small{opacity:.75}
+.tabs{display:flex;border-bottom:1px solid var(--linea);background:var(--papel)}
+.tabs button{flex:1;padding:12px 6px;border:0;background:none;font:inherit;font-size:14px;color:var(--suave);cursor:pointer;border-bottom:3px solid transparent}
+.tabs button[aria-selected="true"]{color:var(--tinta);font-weight:700;border-bottom-color:var(--verde);background:var(--blanco)}
+.buscar{padding:12px 16px;border-bottom:1px solid var(--linea)}
+.buscar input{width:100%;padding:9px 12px;border:1px solid var(--linea);border-radius:8px;font:inherit;font-size:14px}
+.tabla{width:100%;border-collapse:collapse;font-size:14px}
+.tabla th{text-align:left;font-weight:600;color:var(--suave);padding:10px 16px;font-size:13px}
+.tabla td{padding:10px 16px;border-top:1px solid var(--linea);vertical-align:middle}
+.barra{height:7px;background:var(--menta);border-radius:4px;overflow:hidden;min-width:70px}
+.barra span{display:block;height:100%;border-radius:4px;transition:width .5s}
+.est{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.est.ok{background:var(--ok-bg);color:var(--ok)}
+.est.bajo{background:var(--ambar-bg);color:var(--ambar)}
+.est.agotado{background:var(--rojo-bg);color:var(--rojo)}
+.pedir{font:inherit;font-size:12px;font-weight:600;border:1.5px solid var(--verde);color:var(--verde);background:none;border-radius:6px;padding:3px 9px;cursor:pointer}
+.pedir:hover{background:var(--menta)}
+.pedir:disabled{opacity:.4;cursor:not-allowed}
+.pie-panel{padding:10px 16px;font-size:13px;color:var(--suave);background:var(--papel);border-top:1px solid var(--linea);min-height:42px}
+.scroll-x{overflow-x:auto}
+
+/* Problema / solución */
+.titulo{font-size:clamp(28px,4vw,38px);margin-bottom:14px;max-width:20ch}
+.sub{max-width:60ch;color:var(--suave);margin-bottom:40px}
+.antes-despues{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.caja{border-radius:14px;padding:30px}
+.caja.antes{background:var(--rojo-bg);border:1px solid #f3c0ba}
+.caja.despues{background:var(--ok-bg);border:1px solid #b5e0c7}
+.caja h3{font-size:22px;margin-bottom:14px}
+.caja ul{list-style:none;display:grid;gap:10px}
+.caja li{padding-left:28px;position:relative}
+.caja.antes li::before{content:"✕";position:absolute;left:0;color:var(--rojo);font-weight:700}
+.caja.despues li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+
+/* Funciones */
+.fondo-b{background:var(--blanco);border-block:1px solid var(--linea)}
+.func{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+.func-lista{display:grid;gap:8px}
+.func-lista button{text-align:left;font:inherit;background:none;border:1px solid transparent;border-radius:10px;padding:16px 18px;cursor:pointer;color:var(--texto)}
+.func-lista button strong{display:block;font-family:var(--serif);font-size:19px;color:var(--tinta)}
+.func-lista button[aria-selected="true"]{background:var(--menta);border-color:#a9d6c9}
+.func-lista button:hover{background:var(--papel)}
+.func-detalle{background:var(--tinta);color:#e4f1ed;border-radius:14px;padding:34px;min-height:260px}
+.func-detalle h3{color:#fff;font-size:24px;margin-bottom:12px}
+.func-detalle ul{margin:16px 0 0 18px;display:grid;gap:8px}
+
+/* Proceso */
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:p;list-style:none}
+.pasos li{background:var(--blanco);border:1px solid var(--linea);border-radius:12px;padding:24px;position:relative;counter-increment:p}
+.pasos li::before{content:counter(p);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--verde);color:#fff;font-weight:700;margin-bottom:14px}
+.pasos h3{font-size:19px;margin-bottom:8px}
+.pasos p{font-size:15px;color:var(--suave)}
+
+/* Roles */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rol{border-top:4px solid var(--verde);padding:20px 4px 0}
+.rol:nth-child(2){border-color:var(--ambar)}
+.rol:nth-child(3){border-color:var(--tinta)}
+.rol h3{font-size:21px;margin-bottom:8px}
+.rol p{color:var(--suave);font-size:15px}
+
+/* FAQ */
+details{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;margin-bottom:10px;padding:0 20px}
+summary{cursor:pointer;padding:16px 0;font-weight:600;color:var(--tinta);list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--verde)}
+details[open] summary::after{content:"−"}
+details p{padding-bottom:16px;color:var(--suave)}
+
+/* Contacto */
+.contacto{background:var(--tinta);color:#e4f1ed}
+.contacto h2{color:#fff}
+.contacto .sub{color:#b9d3cc}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.datos p{margin-bottom:10px}
+form{display:grid;gap:14px}
+label{font-size:14px;font-weight:600;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:11px 12px;border-radius:8px;border:1.5px solid #3a5b56;background:#fff;color:var(--tinta)}
+textarea{min-height:90px;resize:vertical}
+.error{font-weight:400;font-size:13px;color:#ffb3aa;min-height:16px}
+.exito{background:var(--ok-bg);color:var(--ok);padding:14px;border-radius:8px;font-weight:600}
+.contacto .btn{background:#fff;color:var(--tinta)!important}
+.contacto .btn:hover{background:var(--menta)}
+
+footer{background:#0a2220;color:#9fbab3;padding:26px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:860px){
+  section{padding:60px 0}
+  .hero-grid,.func,.c-grid,.antes-despues{grid-template-columns:1fr}
+  .pasos{grid-template-columns:1fr 1fr}
+  .roles{grid-template-columns:1fr}
+  .menu-btn{display:block}
+  nav ul{display:none;position:absolute;top:64px;left:0;right:0;background:var(--papel);flex-direction:column;padding:20px;border-bottom:1px solid var(--linea);gap:16px}
+  nav ul.abierto{display:flex}
+}
+@media(max-width:520px){.pasos{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
 </head>
 <body>
-    <header>
-        <h1>🩺 MedInventory</h1>
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#beneficios">Beneficios</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-    </header>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio"><i></i>MedInventory</a>
+    <nav aria-label="Principal">
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menú</button>
+      <ul id="menu">
+        <li><a href="#demo">Demostración</a></li>
+        <li><a href="#funciones">Funciones</a></li>
+        <li><a href="#proceso">Cómo funciona</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+        <li><a class="btn" href="#contacto">Solicitar demo</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <main>
-        <section class="hero" id="inicio">
-            <h2>El control de tu inventario en un solo lugar</h2>
-            <p>
-                Administra tus productos médicos, controla las existencias
-                y supervisa los movimientos entre tu matriz y sucursales
-                de una manera sencilla y organizada.
-            </p>
-            <a href="#beneficios" class="boton">Conoce más</a>
-        </section>
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Sabe qué tienes en cada sucursal antes de que se acabe.</h1>
+      <p class="lead">MedInventory concentra las existencias de tu matriz y tus sucursales, avisa cuando un producto está por agotarse y registra cada traspaso de equipo médico.</p>
+      <div class="acciones">
+        <a class="btn" href="#contacto">Solicitar demo</a>
+        <a class="btn sec" href="#demo">Probar el inventario</a>
+      </div>
+      <div class="confianza"><span>Matriz y sucursales</span><span>Alertas de stock</span><span>Historial de traspasos</span></div>
+    </div>
 
-        <section>
-            <h2 class="titulo">¿Quiénes somos?</h2>
-            <p class="descripcion">
-                MedInventory es una propuesta de sistema web enfocada
-                en mejorar la administración de inventarios de empresas
-                dedicadas a la venta de equipos y artículos médicos.
-                Su objetivo es facilitar el registro de productos,
-                consultar existencias y controlar los movimientos
-                de mercancía entre diferentes sucursales.
-            </p>
-            <div class="banner">
-                <h3>Una mejor organización para tu inventario</h3>
-                <p>Controla tus productos y mantén tu información actualizada.</p>
-                <p class="banner-iconos">🏥 🩺 📦</p>
-            </div>
-        </section>
+    <div class="panel" id="demo" aria-label="Demostración interactiva de inventario">
+      <div class="panel-top"><b>Inventario en vivo</b><small>Datos de ejemplo</small></div>
+      <div class="tabs" role="tablist" id="tabs">
+        <button role="tab" aria-selected="true" data-loc="matriz">Matriz</button>
+        <button role="tab" aria-selected="false" data-loc="saucos">Sucursal Saucos</button>
+        <button role="tab" aria-selected="false" data-loc="centro">Sucursal Centro</button>
+      </div>
+      <div class="buscar"><input type="search" id="q" placeholder="Buscar producto…" aria-label="Buscar producto"></div>
+      <div class="scroll-x">
+        <table class="tabla">
+          <thead><tr><th>Producto</th><th>Existencia</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="filas"></tbody>
+        </table>
+      </div>
+      <div class="pie-panel" id="aviso" aria-live="polite">En una sucursal, pulsa “Pedir a matriz” en un producto con stock bajo.</div>
+    </div>
+  </div>
+</section>
 
-        <section id="beneficios">
-            <h2 class="titulo">Beneficios del sistema</h2>
-            <p class="descripcion">
-                Herramientas que ayudan a mejorar el control
-                y la administración de los productos médicos.
-            </p>
-            <div class="tarjetas">
-                <article class="tarjeta">
-                    <div class="icono">📦</div>
-                    <h3>Control de inventario</h3>
-                    <p>Consulta las existencias y mantén un registro organizado de cada producto.</p>
-                </article>
-                <article class="tarjeta">
-                    <div class="icono">🏥</div>
-                    <h3>Control de sucursales</h3>
-                    <p>Supervisa los productos distribuidos entre la matriz y sus diferentes sucursales.</p>
-                </article>
-                <article class="tarjeta">
-                    <div class="icono">📊</div>
-                    <h3>Información organizada</h3>
-                    <p>Administra categorías, precios, cantidades y movimientos de mercancía.</p>
-                </article>
-            </div>
-        </section>
+<section>
+  <div class="wrap">
+    <h2 class="titulo">De las hojas sueltas a un solo registro</h2>
+    <p class="sub">Cuando el inventario vive en libretas y hojas de cálculo distintas, nadie sabe con certeza qué hay en cada lugar.</p>
+    <div class="antes-despues">
+      <div class="caja antes">
+        <h3>Sin sistema</h3>
+        <ul>
+          <li>Cada sucursal lleva sus propias cuentas.</li>
+          <li>El faltante se descubre cuando el cliente ya lo pidió.</li>
+          <li>Los traspasos se acuerdan por llamada o mensaje.</li>
+          <li>Nadie sabe quién movió la mercancía.</li>
+        </ul>
+      </div>
+      <div class="caja despues">
+        <h3>Con MedInventory</h3>
+        <ul>
+          <li>Una sola consulta muestra matriz y sucursales.</li>
+          <li>El sistema alerta cuando el stock llega al mínimo.</li>
+          <li>Cada traspaso queda registrado con fecha y responsable.</li>
+          <li>Los permisos limitan quién puede modificar qué.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section class="contacto" id="contacto">
-            <h2 class="titulo">Contáctanos</h2>
-            <p>¿Quieres conocer más sobre nuestro sistema?</p>
-            <p><strong>Correo:</strong> contacto@medinventory.com</p>
-            <p><strong>Teléfono:</strong> 618 123 4567</p>
-            <p><strong>Ubicación:</strong> Durango, México</p>
-        </section>
-    </main>
+<section class="fondo-b" id="funciones">
+  <div class="wrap">
+    <h2 class="titulo">Lo que puedes hacer con el sistema</h2>
+    <p class="sub">Elige una función para ver en qué te ayuda.</p>
+    <div class="func">
+      <div class="func-lista" role="tablist" aria-label="Funciones" id="funcLista">
+        <button role="tab" aria-selected="true" data-i="0"><strong>Catálogo de productos</strong>Registra equipos y artículos con su información.</button>
+        <button role="tab" aria-selected="false" data-i="1"><strong>Existencias por ubicación</strong>Consulta cuánto hay en cada sucursal.</button>
+        <button role="tab" aria-selected="false" data-i="2"><strong>Traspasos entre sucursales</strong>Mueve mercancía y deja constancia.</button>
+        <button role="tab" aria-selected="false" data-i="3"><strong>Alertas y reportes</strong>Anticípate a los faltantes.</button>
+      </div>
+      <div class="func-detalle" id="funcDetalle" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>© 2026 MedInventory - Sistema de Inventario de Equipos Médicos</p>
-        <p>Proyecto académico de desarrollo de software.</p>
-    </footer>
+<section id="proceso">
+  <div class="wrap">
+    <h2 class="titulo">Cómo se mueve un producto</h2>
+    <p class="sub">El recorrido de una solicitud de reabastecimiento, de principio a fin.</p>
+    <ol class="pasos">
+      <li><h3>Se detecta el faltante</h3><p>El sistema marca el producto cuando baja del mínimo definido.</p></li>
+      <li><h3>La sucursal solicita</h3><p>El encargado pide la cantidad necesaria a la matriz.</p></li>
+      <li><h3>La matriz confirma</h3><p>Se revisa la existencia y se autoriza el envío.</p></li>
+      <li><h3>Se actualiza todo</h3><p>Las existencias de ambas ubicaciones cambian y el movimiento queda en el historial.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="fondo-b">
+  <div class="wrap">
+    <h2 class="titulo">Cada persona ve lo que necesita</h2>
+    <p class="sub">Los permisos separan quién consulta, quién solicita y quién autoriza.</p>
+    <div class="roles">
+      <div class="rol"><h3>Administrador</h3><p>Da de alta productos, define mínimos, gestiona usuarios y revisa todos los reportes.</p></div>
+      <div class="rol"><h3>Encargado de sucursal</h3><p>Consulta su inventario, registra entradas y salidas, y solicita reabastecimiento a la matriz.</p></div>
+      <div class="rol"><h3>Almacén de matriz</h3><p>Recibe solicitudes, autoriza traspasos y controla las existencias centrales.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:780px">
+    <h2 class="titulo">Preguntas frecuentes</h2>
+    <p class="sub">Lo que suelen preguntar antes de empezar.</p>
+    <details><summary>¿Cuántas sucursales puedo manejar?</summary><p>El proyecto está pensado para una matriz y varias sucursales, y puede ampliarse agregando nuevas ubicaciones.</p></details>
+    <details><summary>¿Puedo definir un mínimo distinto por producto?</summary><p>Sí. Cada producto tiene su propio nivel mínimo, y la alerta se activa al llegar a él.</p></details>
+    <details><summary>¿Se puede saber quién hizo un movimiento?</summary><p>Cada entrada, salida o traspaso se guarda con fecha, usuario y cantidad.</p></details>
+    <details><summary>¿Funciona desde el celular?</summary><p>La interfaz es adaptable, así que puede consultarse desde computadora, tableta o teléfono.</p></details>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="wrap c-grid">
+    <div>
+      <h2 class="titulo">Solicita una demostración</h2>
+      <p class="sub">Cuéntanos cómo manejas hoy tu inventario y te mostramos cómo quedaría en MedInventory.</p>
+      <div class="datos">
+        <p><strong>Correo:</strong> contacto@medinventory.com</p>
+        <p><strong>Teléfono:</strong> 618 123 4567</p>
+        <p><strong>Ubicación:</strong> Durango, México</p>
+      </div>
+    </div>
+    <form id="form" novalidate>
+      <label>Nombre<input id="nombre" autocomplete="name"><span class="error" id="e-nombre"></span></label>
+      <label>Correo electrónico<input id="correo" type="email" autocomplete="email"><span class="error" id="e-correo"></span></label>
+      <label>Número de sucursales
+        <select id="suc"><option>Solo matriz</option><option>2 a 3</option><option>4 o más</option></select>
+      </label>
+      <label>Mensaje<textarea id="msg"></textarea></label>
+      <button class="btn" type="submit">Enviar solicitud</button>
+      <div id="ok" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 MedInventory · Sistema de Inventario de Equipos Médicos</span><span>Proyecto académico de desarrollo de software</span></div>
+</footer>
+
+<script>
+/* ---- Inventario de demostración ---- */
+const productos=[
+  {n:"Monitor de signos vitales",min:5,s:{matriz:24,saucos:3,centro:9}},
+  {n:"Oxímetro de pulso",min:15,s:{matriz:60,saucos:18,centro:6}},
+  {n:"Baumanómetro digital",min:8,s:{matriz:30,saucos:11,centro:0}},
+  {n:"Nebulizador",min:6,s:{matriz:16,saucos:2,centro:8}},
+  {n:"Silla de ruedas",min:3,s:{matriz:12,saucos:4,centro:5}},
+  {n:"Termómetro infrarrojo",min:20,s:{matriz:80,saucos:25,centro:12}}
+];
+let loc="matriz";
+const filas=document.getElementById("filas"),aviso=document.getElementById("aviso"),q=document.getElementById("q");
+
+function estado(p,c){
+  if(c===0)return["agotado","Agotado"];
+  if(c<=p.min)return["bajo","Stock bajo"];
+  return["ok","Disponible"];
+}
+function pintar(){
+  const t=q.value.trim().toLowerCase();
+  filas.innerHTML="";
+  productos.filter(p=>p.n.toLowerCase().includes(t)).forEach(p=>{
+    const c=p.s[loc],[cl,tx]=estado(p,c);
+    const pct=Math.min(100,Math.round(c/(p.min*4)*100));
+    const color=cl==="ok"?"var(--ok)":cl==="bajo"?"var(--ambar)":"var(--rojo)";
+    const puede=loc!=="matriz"&&cl!=="ok";
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${p.n}</td>
+      <td><strong>${c}</strong><div class="barra"><span style="width:${pct}%;background:${color}"></span></div></td>
+      <td><span class="est ${cl}">${tx}</span></td>
+      <td>${puede?`<button class="pedir" ${p.s.matriz<=p.min?"disabled":""}>Pedir a matriz</button>`:""}</td>`;
+    const b=tr.querySelector(".pedir");
+    if(b)b.onclick=()=>traspasar(p);
+    filas.appendChild(tr);
+  });
+  if(!filas.children.length)filas.innerHTML='<tr><td colspan="4">No hay productos con ese nombre.</td></tr>';
+}
+function traspasar(p){
+  const cant=Math.min(p.min*2,p.s.matriz-p.min);
+  if(cant<=0){aviso.textContent="La matriz no tiene existencia suficiente para este traspaso.";return}
+  p.s.matriz-=cant;p.s[loc]+=cant;
+  const dest=loc==="saucos"?"Sucursal Saucos":"Sucursal Centro";
+  aviso.textContent=`Traspaso registrado: ${cant} × ${p.n} de Matriz a ${dest}.`;
+  pintar();
+}
+document.getElementById("tabs").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  loc=b.dataset.loc;
+  document.querySelectorAll("#tabs button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  pintar();
+});
+q.addEventListener("input",pintar);
+pintar();
+
+/* ---- Funciones ---- */
+const funciones=[
+  {t:"Catálogo de productos",d:"Un registro único de cada equipo y artículo médico que vendes.",l:["Nombre, categoría y precio","Nivel mínimo por producto","Búsqueda rápida por nombre"]},
+  {t:"Existencias por ubicación",d:"Consulta cuánto hay de cada producto en la matriz y en cada sucursal, sin llamadas ni hojas aparte.",l:["Vista por ubicación","Indicador de disponible, bajo o agotado","Actualización al instante"]},
+  {t:"Traspasos entre sucursales",d:"Mueve mercancía de la matriz a una sucursal y el sistema ajusta ambas existencias.",l:["Solicitud y autorización","Cantidad validada contra la existencia","Historial con fecha y responsable"]},
+  {t:"Alertas y reportes",d:"Detecta los productos próximos a agotarse y revisa los movimientos de cualquier periodo.",l:["Alerta al llegar al mínimo","Reporte de movimientos","Resumen de inventario por sucursal"]}
+];
+const det=document.getElementById("funcDetalle");
+function funcion(i){
+  const f=funciones[i];
+  det.innerHTML=`<h3>${f.t}</h3><p>${f.d}</p><ul>${f.l.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+}
+document.getElementById("funcLista").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;
+  document.querySelectorAll("#funcLista button").forEach(x=>x.setAttribute("aria-selected",x===b));
+  funcion(+b.dataset.i);
+});
+funcion(0);
+
+/* ---- Menú móvil ---- */
+const mb=document.getElementById("menuBtn"),mn=document.getElementById("menu");
+mb.onclick=()=>{const a=mn.classList.toggle("abierto");mb.setAttribute("aria-expanded",a)};
+mn.addEventListener("click",e=>{if(e.target.tagName==="A"){mn.classList.remove("abierto");mb.setAttribute("aria-expanded","false")}});
+
+/* ---- Formulario ---- */
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const n=document.getElementById("nombre"),c=document.getElementById("correo");
+  const en=document.getElementById("e-nombre"),ec=document.getElementById("e-correo");
+  en.textContent=n.value.trim().length<3?"Escribe tu nombre completo.":"";
+  ec.textContent=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.value)?"":"Escribe un correo válido, por ejemplo nombre@empresa.com.";
+  if(en.textContent||ec.textContent)return;
+  document.getElementById("ok").innerHTML=`<p class="exito">Solicitud enviada. Gracias, ${n.value.trim().split(" ")[0]}; te contactaremos pronto.</p>`;
+  e.target.reset();
+});
+</script>
 </body>
 </html>
