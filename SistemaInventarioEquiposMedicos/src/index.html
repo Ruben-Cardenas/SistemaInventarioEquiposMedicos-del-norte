@@ -119,6 +119,47 @@ summary::after{content:"+";font-size:22px;line-height:1;color:var(--verde)}
 details[open] summary::after{content:"−"}
 details p{padding-bottom:16px;color:var(--suave)}
 
+/* Promoción */
+.promo-bar{background:var(--tinta);color:#fff;text-align:center;padding:9px 44px 9px 16px;font-size:14px;position:relative}
+.promo-bar b{color:#f2b63c}
+.promo-bar a{color:#fff;font-weight:600;margin-left:6px}
+.promo-bar button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:20px;cursor:pointer;line-height:1;padding:4px 8px}
+.toggle{display:inline-flex;border:1.5px solid var(--tinta);border-radius:30px;overflow:hidden;margin-bottom:34px}
+.toggle button{font:inherit;font-size:14px;font-weight:600;border:0;background:none;padding:8px 20px;cursor:pointer;color:var(--tinta)}
+.toggle button[aria-pressed="true"]{background:var(--tinta);color:#fff}
+.planes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.plan{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:30px;display:flex;flex-direction:column;position:relative}
+.plan.top{border:2px solid var(--verde);box-shadow:0 18px 40px -24px rgba(11,122,107,.6)}
+.plan .etq{position:absolute;top:-13px;left:24px;background:var(--verde);color:#fff;font-size:12px;font-weight:700;padding:3px 12px;border-radius:20px}
+.plan h3{font-size:22px;margin-bottom:6px}
+.plan .para{font-size:14px;color:var(--suave);margin-bottom:18px}
+.precio{font-family:var(--serif);font-size:40px;color:var(--tinta);line-height:1}
+.precio small{font-family:var(--sans);font-size:14px;color:var(--suave)}
+.plan ul{list-style:none;display:grid;gap:9px;margin:22px 0 26px;font-size:15px;flex:1}
+.plan li{padding-left:26px;position:relative}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+.plan .btn{text-align:center}
+.nota{font-size:13px;color:var(--suave);margin-top:16px;text-align:center}
+.oferta{margin-top:44px;background:linear-gradient(120deg,var(--tinta),#12514a);color:#e4f1ed;border-radius:16px;padding:34px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+.oferta h3{color:#fff;font-size:28px;margin-bottom:10px}
+.oferta .cod{display:inline-flex;align-items:center;gap:10px;margin-top:14px;background:rgba(255,255,255,.12);border:1.5px dashed #f2b63c;border-radius:8px;padding:8px 8px 8px 16px;font-weight:700;letter-spacing:2px}
+.oferta .cod button{font:inherit;font-size:13px;letter-spacing:0;font-weight:600;background:#f2b63c;color:var(--tinta);border:0;border-radius:6px;padding:6px 12px;cursor:pointer}
+.cuenta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}
+.cuenta div{background:rgba(255,255,255,.1);border-radius:10px;padding:14px 4px}
+.cuenta b{display:block;font-family:var(--serif);font-size:30px;color:#fff;line-height:1}
+.cuenta span{font-size:12px;color:#b9d3cc}
+.cuenta-tit{grid-column:1/-1;font-size:13px;color:#b9d3cc;text-align:center}
+.testi{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.testi figure{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:28px}
+.testi blockquote{font-family:var(--serif);font-size:18px;color:var(--tinta);line-height:1.45;margin-bottom:18px}
+.testi figcaption{font-size:14px;color:var(--suave)}
+.testi figcaption b{display:block;color:var(--tinta)}
+.cta-final{background:var(--verde);color:#fff;text-align:center;padding:64px 0}
+.cta-final h2{color:#fff;font-size:clamp(26px,4vw,36px);margin-bottom:12px}
+.cta-final p{max-width:56ch;margin:0 auto 26px;color:#d9efe8}
+.cta-final .btn{background:#fff;color:var(--tinta)!important}
+.cta-final .btn:hover{background:var(--menta)}
+
 /* Contacto */
 .contacto{background:var(--tinta);color:#e4f1ed}
 .contacto h2{color:#fff}
@@ -139,6 +180,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
 @media(max-width:860px){
   section{padding:60px 0}
+  .planes,.testi,.oferta{grid-template-columns:1fr}
   .hero-grid,.func,.c-grid,.antes-despues{grid-template-columns:1fr}
   .pasos{grid-template-columns:1fr 1fr}
   .roles{grid-template-columns:1fr}
@@ -151,6 +193,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </style>
 </head>
 <body>
+<div class="promo-bar" id="promoBar"><b>Oferta de lanzamiento:</b> 20 % de descuento en tus primeros 3 meses con el código <b>LANZA20</b> <a href="#planes">Ver planes</a><button type="button" id="promoCerrar" aria-label="Cerrar aviso">×</button></div>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#inicio"><i></i>MedInventory</a>
@@ -160,6 +203,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
         <li><a href="#demo">Demostración</a></li>
         <li><a href="#funciones">Funciones</a></li>
         <li><a href="#proceso">Cómo funciona</a></li>
+        <li><a href="#planes">Planes</a></li>
         <li><a href="#faq">Preguntas</a></li>
         <li><a class="btn" href="#contacto">Solicitar demo</a></li>
       </ul>
@@ -267,6 +311,64 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   </div>
 </section>
 
+<section id="planes">
+  <div class="wrap">
+    <h2 class="titulo">Un plan para cada etapa de tu negocio</h2>
+    <p class="sub">Empieza con una sucursal y crece cuando lo necesites. Sin contratos forzosos.</p>
+    <div class="toggle" role="group" aria-label="Periodo de facturación">
+      <button type="button" id="tMes" aria-pressed="true">Mensual</button>
+      <button type="button" id="tAnio" aria-pressed="false">Anual · 2 meses gratis</button>
+    </div>
+    <div class="planes">
+      <article class="plan">
+        <h3>Básico</h3><p class="para">Para empezar a ordenar el inventario.</p>
+        <div class="precio">$<span class="pv" data-m="499" data-a="416">499</span> <small>MXN / mes</small></div>
+        <ul><li>Matriz y 1 sucursal</li><li>Hasta 300 productos</li><li>Alertas de stock bajo</li><li>1 usuario administrador</li></ul>
+        <a class="btn sec" href="#contacto" data-plan="Básico">Elegir Básico</a>
+      </article>
+      <article class="plan top">
+        <span class="etq">Más popular</span>
+        <h3>Profesional</h3><p class="para">Para distribuidoras con varias sucursales.</p>
+        <div class="precio">$<span class="pv" data-m="999" data-a="833">999</span> <small>MXN / mes</small></div>
+        <ul><li>Matriz y hasta 5 sucursales</li><li>Productos ilimitados</li><li>Traspasos con historial</li><li>Roles y permisos</li><li>Reportes de movimientos</li></ul>
+        <a class="btn" href="#contacto" data-plan="Profesional">Elegir Profesional</a>
+      </article>
+      <article class="plan">
+        <h3>Empresarial</h3><p class="para">Para operaciones grandes o con necesidades propias.</p>
+        <div class="precio" style="font-size:30px">A la medida</div>
+        <ul><li>Sucursales ilimitadas</li><li>Capacitación del personal</li><li>Importación de tu inventario actual</li><li>Soporte prioritario</li></ul>
+        <a class="btn sec" href="#contacto" data-plan="Empresarial">Cotizar</a>
+      </article>
+    </div>
+    <p class="nota">Precios de ejemplo para el proyecto académico. Pagando el plan anual se muestra el costo mensual equivalente.</p>
+
+    <div class="oferta">
+      <div>
+        <h3>20 % menos en tus primeros 3 meses</h3>
+        <p>Úsalo al solicitar tu demostración y menciona el código en el mensaje. Válido para planes Básico y Profesional.</p>
+        <div class="cod"><span id="codigo">LANZA20</span><button type="button" id="copiar">Copiar código</button></div>
+      </div>
+      <div class="cuenta" id="cuenta" aria-live="off">
+        <p class="cuenta-tit" id="cuentaTit">La oferta termina el 31 de diciembre de 2026</p>
+        <div><b id="cd">0</b><span>días</span></div><div><b id="ch">0</b><span>horas</span></div>
+        <div><b id="cm">0</b><span>min</span></div><div><b id="cs">0</b><span>seg</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fondo-b">
+  <div class="wrap">
+    <h2 class="titulo">Lo que dirían quienes lo usan</h2>
+    <p class="sub">Testimonios de ejemplo, escritos para ilustrar el diseño de la página.</p>
+    <div class="testi">
+      <figure><blockquote>“Antes me enteraba del faltante cuando el cliente ya estaba en mostrador. Ahora la alerta llega primero.”</blockquote><figcaption><b>Laura M.</b>Encargada de sucursal</figcaption></figure>
+      <figure><blockquote>“Los traspasos dejaron de ser llamadas y mensajes. Todo queda registrado con fecha y responsable.”</blockquote><figcaption><b>Carlos R.</b>Almacén de matriz</figcaption></figure>
+      <figure><blockquote>“Por fin veo el inventario de todas las sucursales en una sola pantalla.”</blockquote><figcaption><b>Dra. Patricia G.</b>Administradora</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section id="faq">
   <div class="wrap" style="max-width:780px">
     <h2 class="titulo">Preguntas frecuentes</h2>
@@ -275,6 +377,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
     <details><summary>¿Puedo definir un mínimo distinto por producto?</summary><p>Sí. Cada producto tiene su propio nivel mínimo, y la alerta se activa al llegar a él.</p></details>
     <details><summary>¿Se puede saber quién hizo un movimiento?</summary><p>Cada entrada, salida o traspaso se guarda con fecha, usuario y cantidad.</p></details>
     <details><summary>¿Funciona desde el celular?</summary><p>La interfaz es adaptable, así que puede consultarse desde computadora, tableta o teléfono.</p></details>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <h2>Deja de adivinar cuánto tienes en cada sucursal</h2>
+    <p>Agenda una demostración gratuita y te mostramos cómo quedaría tu inventario en MedInventory.</p>
+    <a class="btn" href="#contacto">Agendar demostración gratis</a>
   </div>
 </section>
 
@@ -384,6 +494,37 @@ funcion(0);
 const mb=document.getElementById("menuBtn"),mn=document.getElementById("menu");
 mb.onclick=()=>{const a=mn.classList.toggle("abierto");mb.setAttribute("aria-expanded",a)};
 mn.addEventListener("click",e=>{if(e.target.tagName==="A"){mn.classList.remove("abierto");mb.setAttribute("aria-expanded","false")}});
+
+/* ---- Promoción ---- */
+document.getElementById("promoCerrar").onclick=()=>document.getElementById("promoBar").remove();
+
+const pv=document.querySelectorAll(".pv"),tM=document.getElementById("tMes"),tA=document.getElementById("tAnio");
+function periodo(anual){
+  pv.forEach(e=>e.textContent=anual?e.dataset.a:e.dataset.m);
+  tM.setAttribute("aria-pressed",!anual);tA.setAttribute("aria-pressed",anual);
+}
+tM.onclick=()=>periodo(false);tA.onclick=()=>periodo(true);
+
+document.getElementById("copiar").onclick=async e=>{
+  const b=e.target;
+  try{await navigator.clipboard.writeText("LANZA20");b.textContent="¡Copiado!"}
+  catch(err){b.textContent="Código: LANZA20"}
+  setTimeout(()=>b.textContent="Copiar código",2000);
+};
+
+const fin=new Date("2026-12-31T23:59:59-06:00").getTime();
+function cuenta(){
+  let d=fin-Date.now();
+  if(d<=0){document.getElementById("cuentaTit").textContent="La oferta de lanzamiento ha finalizado";d=0;}
+  const v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
+  ["cd","ch","cm","cs"].forEach((id,i)=>document.getElementById(id).textContent=v[i]);
+}
+cuenta();setInterval(cuenta,1000);
+
+document.querySelectorAll("[data-plan]").forEach(a=>a.addEventListener("click",()=>{
+  const m=document.getElementById("msg");
+  if(!m.value.trim())m.value="Me interesa el plan "+a.dataset.plan+".";
+}));
 
 /* ---- Formulario ---- */
 document.getElementById("form").addEventListener("submit",e=>{
