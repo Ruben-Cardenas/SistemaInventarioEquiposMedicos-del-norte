@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedInventory: sistema para administrar productos médicos y controlar existencias entre matriz y sucursales.">
+    <title>MedInventory | Inventario Médico</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f8fa;
+            color: #263746;
+            line-height: 1.6;
+        }
+        header {
+            background: #125c68;
+            color: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        header h1 { font-size: 23px; }
+        nav { display: flex; flex-wrap: wrap; gap: 18px; }
+        nav a { color: white; text-decoration: none; }
+        nav a:hover { text-decoration: underline; }
+        .hero {
+            background: linear-gradient(120deg, #125c68, #238c91);
+            color: white;
+            padding: 85px 10%;
+            text-align: center;
+        }
+        .hero h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 20px; }
+        .hero p { max-width: 700px; margin: auto; font-size: 18px; }
+        .boton {
+            display: inline-block;
+            margin-top: 28px;
+            background: white;
+            color: #125c68;
+            padding: 13px 28px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .boton:hover { background: #e5f2f2; }
+        section { padding: 65px 9%; }
+        .titulo {
+            text-align: center;
+            color: #125c68;
+            font-size: 29px;
+            margin-bottom: 20px;
+        }
+        .descripcion { max-width: 800px; margin: auto; text-align: center; }
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+            margin-top: 35px;
+        }
+        .tarjeta {
+            background: white;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+        .icono { font-size: 38px; margin-bottom: 12px; }
+        .tarjeta h3 { color: #176b78; margin-bottom: 12px; }
+        .banner {
+            background: #e0f0f0;
+            text-align: center;
+            border-radius: 15px;
+            padding: 45px 20px;
+            margin-top: 25px;
+        }
+        .banner h3 { color: #125c68; font-size: 25px; }
+        .banner-iconos { font-size: 48px; margin-top: 15px; }
+        .contacto { background: #eaf1f3; text-align: center; }
+        .contacto p { margin: 8px; }
+        footer {
+            background: #103f49;
+            color: white;
+            text-align: center;
+            padding: 22px;
+        }
+        @media (max-width: 600px) {
+            header { justify-content: center; text-align: center; }
+            .hero { padding: 65px 7%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🩺 MedInventory</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <h2>El control de tu inventario en un solo lugar</h2>
+            <p>
+                Administra tus productos médicos, controla las existencias
+                y supervisa los movimientos entre tu matriz y sucursales
+                de una manera sencilla y organizada.
+            </p>
+            <a href="#beneficios" class="boton">Conoce más</a>
+        </section>
+
+        <section>
+            <h2 class="titulo">¿Quiénes somos?</h2>
+            <p class="descripcion">
+                MedInventory es una propuesta de sistema web enfocada
+                en mejorar la administración de inventarios de empresas
+                dedicadas a la venta de equipos y artículos médicos.
+                Su objetivo es facilitar el registro de productos,
+                consultar existencias y controlar los movimientos
+                de mercancía entre diferentes sucursales.
+            </p>
+            <div class="banner">
+                <h3>Una mejor organización para tu inventario</h3>
+                <p>Controla tus productos y mantén tu información actualizada.</p>
+                <p class="banner-iconos">🏥 🩺 📦</p>
+            </div>
+        </section>
+
+        <section id="beneficios">
+            <h2 class="titulo">Beneficios del sistema</h2>
+            <p class="descripcion">
+                Herramientas que ayudan a mejorar el control
+                y la administración de los productos médicos.
+            </p>
+            <div class="tarjetas">
+                <article class="tarjeta">
+                    <div class="icono">📦</div>
+                    <h3>Control de inventario</h3>
+                    <p>Consulta las existencias y mantén un registro organizado de cada producto.</p>
+                </article>
+                <article class="tarjeta">
+                    <div class="icono">🏥</div>
+                    <h3>Control de sucursales</h3>
+                    <p>Supervisa los productos distribuidos entre la matriz y sus diferentes sucursales.</p>
+                </article>
+                <article class="tarjeta">
+                    <div class="icono">📊</div>
+                    <h3>Información organizada</h3>
+                    <p>Administra categorías, precios, cantidades y movimientos de mercancía.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="contacto" id="contacto">
+            <h2 class="titulo">Contáctanos</h2>
+            <p>¿Quieres conocer más sobre nuestro sistema?</p>
+            <p><strong>Correo:</strong> contacto@medinventory.com</p>
+            <p><strong>Teléfono:</strong> 618 123 4567</p>
+            <p><strong>Ubicación:</strong> Durango, México</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 MedInventory - Sistema de Inventario de Equipos Médicos</p>
+        <p>Proyecto académico de desarrollo de software.</p>
+    </footer>
+</body>
+</html>

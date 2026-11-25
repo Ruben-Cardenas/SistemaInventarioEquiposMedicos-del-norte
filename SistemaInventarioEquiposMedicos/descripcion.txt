@@ -1,0 +1,15 @@
+NOMBRE DEL PROYECTO:
+Sistema de Inventario de Equipos Médicos.
+
+PROBLEMA:
+Actualmente, el control de inventario de algunos negocios de equipos médicos se realiza de manera manual, lo que puede provocar errores en las cantidades de productos, falta de información y dificultades para conocer las existencias de cada sucursal.
+
+OBJETIVO:
+Desarrollar un sistema web que permita administrar y controlar los productos médicos de una matriz y sus sucursales, facilitando el registro de productos, la consulta de existencias y el seguimiento de los movimientos de inventario.
+
+DESCRIPCIÓN:
+El Sistema de Inventario de Equipos Médicos es un proyecto tecnológico enfocado en mejorar la administración de productos de una empresa dedicada a la venta de artículos y equipos médicos.
+
+El sistema permitirá registrar productos como fajas, medias de compresión y otros artículos ortopédicos, organizar sus categorías, consultar precios y controlar las cantidades disponibles.
+
+También permitirá llevar un mejor control de los productos enviados desde la matriz hacia las sucursales Saucos y 450, ayudando a mantener actualizada la información del inventario.
